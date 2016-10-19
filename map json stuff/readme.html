@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>How to generate json for UK map svg</title>
+    <meta name="description" content="Vladislavs Ignatjevs">
+</head>
+
+<h1>Preparing stuff</h1>
+download this zip archive:<br>
+<a href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_map_subunits.zip">ne_10m_admin_0_map_subunits.zip</a>
+
+<p>
+    First need to install gdal and topojson:<br>
+    Easiest way is to install using <a href="http://brew.sh/">Homebrew</a><br>
+    'brew install gdal'<br>
+    'brew install npm'<br>
+    and then<br>
+    'npm install -g topojson'<br>
+    <br>
+    verify:<br>
+    'which ogr2ogr'<br>
+    'which topojson'<br>
+    <br>
+    ..should return /usr/local/bin/ogr2ogr and /usr/local/bin/topojson<br>
+    <br>
+    Now, for simplicty, lets install and run http server:<br>
+    'npm install http-server -g'<br>
+    <br>
+    then run 'http-server -p 8008 &'<br>
+    <br>
+    unzip archives into your project dir.<br>
+
+</p>
+<p>
+    now 'cd ne_10m_admin_0_map_subunits' and run the following:<br>
+
+    <br>
+    ogr2ogr /<br>
+    -f GeoJSON /<br>
+    -where "ADM0_A3 IN ('GBR', 'IRL', 'IMN')" /<br>
+    countries_regions.json /<br>
+    ne_10m_admin_0_map_subunits.shp<br>
+    <br>
+    <i>this will create geojson format json file (countries_regions.json)</i><br>
+    <br>
+    <i>Options like 'IMN', 'GBR' can be added or removed according to <a
+            href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3">ISO 3166-1 alpha 3</a></i><br>
+    <br>
+    then 'mv countries_regions.json ..'<br>
+    'cd ..' will get you back to your project dir.<br>
+    run the following here:<br>
+    <br>
+    topojson /<br>
+    -o ukCountries.json /<br>
+    --id-property SU_A3 /<br>
+    --properties name=NAME /<br>
+    --countries_regions.json<br>
+    <br>
+    <i>this will create topojson format json file (countries_regions.json) that is used in a project</i><br>
+</p>
+<body>
+
+</body>
+</html>

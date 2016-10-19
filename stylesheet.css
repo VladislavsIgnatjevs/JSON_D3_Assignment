@@ -1,0 +1,60 @@
+.subunit.SCT {
+    fill: #ddc;
+}
+
+.subunit.WLS {
+    fill: #cdd;
+}
+
+.subunit.NIR {
+    fill: #cdc;
+}
+
+.subunit.ENG {
+    fill: #dcd;
+}
+
+.subunit.IMN {
+    fill: #D5C9C1;
+}
+
+.subunit.IRL {
+    display: none;
+}
+
+.subunit-boundary {
+    fill: none;
+    stroke: #777;
+    stroke-dasharray: 2, 2;
+    stroke-linejoin: round;
+}
+
+.subunit-boundary.IRL {
+    stroke: #aaa;
+}
+
+.county-boundary {
+    fill: none;
+    stroke: #777;
+}
+
+.background {
+    fill: none;
+    pointer-events: all;
+}
+
+.feature {
+    fill: #ccc;
+    cursor: pointer;
+}
+
+.feature.active {
+    fill: orange;
+}
+
+.mesh {
+    fill: none;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
