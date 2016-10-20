@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<svg width="960" height="600"></svg>
+<!--jquery-->
+<script src="js/jquery-2.2.0.min.js"></script>
+
+<!--D3-->
+<script src="js/d3/d3.v3.min.js"></script>
+<script src="//d3js.org/d3.v4.min.js"></script>
+
+<!-- Topojson -->
+<script src="js/topojson.v1.min.js"></script>
+
+<!-- JSON adapter -->
+<script src="js/json_adapter.js"></script>
+
+<script>
+
+    var width = 1000,
+            height = 900,
+            active = d3.select(null),
+            projection = d3.geo.albers()
+                    .center([0, 55.4])
+                    .rotate([4.4, 0])
+                    .parallels([50, 60])
+                    .scale(800 * 5)
+                    .translate([width / 2, height / 2]),
+            path = d3.geo.path()
+                    .projection(projection),
+            svg = d3.select("body").append("svg")
+                    .attr("width", width)
+                    .attr("height", height);
+    towns = [];
+
+    svg.selectAll(".domain")
+            .style("display", "none");
+
+
+    var g = svg.append("g")
+            .attr("class", "brush")
+            .call(brush);
+
+
+    var cities = svg.append("cities");
+
+
+    //populating countries to the map SCT, WLS, NIR, ENG, IMN
+    d3.json("ukCountries.json", function (error, uk) {
+        if (error) throw error;
+
+        g.selectAll(".subunit")
+                .data(topojson.feature(uk, uk.objects.countries_regions).features)
+                .enter().append("path")
+                .attr("class", function (d) {
+                    return "subunit " + d.id;
+                })
+                .attr("d", path);
+
+        g.append("path")
+                .datum(topojson.mesh(uk, uk.objects.countries_regions, function (a, b) {
+                    return a !== b;
+                }))
+                .attr("class", "mesh")
+                .attr("d", path);
+
+    });
+
+    var k = height / width,
+            x0 = [-4.5, 4.5],
+            y0 = [-4.5 * k, 4.5 * k],
+            x = d3.scaleLinear().domain(x0).range([0, width]),
+            y = d3.scaleLinear().domain(y0).range([height, 0]),
+            z = d3.scaleOrdinal(d3.schemeCategory10);
+
+
+    var brush = d3.brush().on("end", brushended),
+            idleTimeout,
+            idleDelay = 350;
+
+
+
+
+
+    function brushended() {
+        var s = d3.event.selection;
+        if (!s) {
+            if (!idleTimeout) return idleTimeout = setTimeout(idled, idleDelay);
+            x.domain(x0);
+            y.domain(y0);
+        } else {
+            x.domain([s[0][0], s[1][0]].map(x.invert, x));
+            y.domain([s[1][1], s[0][1]].map(y.invert, y));
+            svg.select(".brush").call(brush.move, null);
+        }
+        zoom();
+    }
+
+    function idled() {
+        idleTimeout = null;
+    }
+
+    function zoom() {
+        var t = svg.transition().duration(750);
+        svg.selectAll("subunit").transition(t)
+                .attr("cx", function(d) { return x(d[0]); })
+                .attr("cy", function(d) { return y(d[1]); });
+    }
+
+</script>

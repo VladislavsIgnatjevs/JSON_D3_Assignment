@@ -46,6 +46,8 @@ function getCities(numberOfCities) {
                 .attr("class", 'town_icos')
                 .append("svg:title")
                 .text(name);
+
+
             //add title
 
             g.append("text")

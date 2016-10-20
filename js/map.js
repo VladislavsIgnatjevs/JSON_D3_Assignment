@@ -3,7 +3,7 @@
  */
 
 var width = 960,
-    height = 1160,
+    height = 900,
     active = d3.select(null),
     projection = d3.geo.albers()
         .center([0, 55.4])
@@ -27,6 +27,8 @@ var width = 960,
 svg.append("rect")
     .attr("class", "background")
     .attr("width", width)
+    .style("stroke", 'black')
+    .style("stroke-width", '3px')
     .attr("height", height)
     .on("click", reset);
 
