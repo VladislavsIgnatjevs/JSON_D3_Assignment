@@ -27,6 +27,7 @@
     display: none;
 
 }
+
 .subunit-label.IRL {
     display: none;
 }
@@ -81,8 +82,8 @@
 
 }
 
-.town_icon:hover{
-    fill-opacity:0.8;
+.town_icon:hover {
+    fill-opacity: 0.8;
     opacity: 0.5;
 
 }

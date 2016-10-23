@@ -9,7 +9,7 @@ $(document).ready(function () {
 
 //get cities from api
 function getCities(numberOfCities) {
-    //erase all towns from map to allow refresh
+    //erase all towns and titles from map to allow refresh
     g.selectAll(".town_icon").remove();
     g.selectAll(".town_icon_text").remove();
     var lng = '',
@@ -44,7 +44,7 @@ function getCities(numberOfCities) {
             var coordinates = projection([lng, lat]),
                 //show random icon for city when appening - to make map more colorful, add more icos to the project and
                 //add filenames in the array below
-                icosArray = ['town_ico.png','town_ico1.png'],
+                icosArray = ['town_ico.png', 'town_ico1.png'],
                 rand = icosArray[Math.floor(Math.random() * icosArray.length)];
             g.append("svg:image")
                 .attr("x", coordinates[0])

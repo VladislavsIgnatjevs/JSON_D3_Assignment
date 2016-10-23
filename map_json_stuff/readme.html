@@ -10,8 +10,11 @@
     <script src="/js/jquery-2.2.0.min.js"></script>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
 
 
     <!-- main CSS -->
@@ -46,18 +49,23 @@
     <pre><code>'which topojson'</code></pre>
 
 
-    ..should return <pre><code>/usr/local/bin/ogr2ogr</code></pre> and <pre><code>/usr/local/bin/topojson</code></pre>
+    ..should return
+    <pre><code>/usr/local/bin/ogr2ogr</code></pre>
+    and
+    <pre><code>/usr/local/bin/topojson</code></pre>
 
     Now, for simplicty, lets install and run http server:<br>
     <pre><code>'npm install http-server -g'</code></pre>
 
-    then open new terminal window and run <pre><code>'http-server -p 8008 &'</code></pre>
+    then open new terminal window and run
+    <pre><code>'http-server -p 8008 &'</code></pre>
 
     unzip archives into your project dir.<br>
 
     <li> Now let's create our .json for UK map</li>
 
-    <pre><code>cd ne_10m_admin_0_map_subunits</code></pre> and run the following:
+    <pre><code>cd ne_10m_admin_0_map_subunits</code></pre>
+    and run the following:
 
     <pre><code>
     ogr2ogr /
@@ -75,8 +83,10 @@
     </ul>
 
 
-    then <pre><code>mv countries_regions.json ..</code></pre>
-    <pre><code>cd ..</code></pre> will get you back to your project dir.
+    then
+    <pre><code>mv countries_regions.json ..</code></pre>
+    <pre><code>cd ..</code></pre>
+    will get you back to your project dir.
 
     run the following here:
     <pre><code>
@@ -87,7 +97,8 @@
     --countries_regions.json
     </code></pre>
     <ul>
-        <li><i>this will create topojson format json file <kbd>countries_regions.json</kbd> that is used in a project</i></li>
+        <li><i>this will create topojson format json file <kbd>countries_regions.json</kbd> that is used in a
+            project</i></li>
     </ul>
 </ol>
 </body>

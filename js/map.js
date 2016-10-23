@@ -37,8 +37,7 @@ svg.append("rect")
     .attr("height", height)
     .on("click", reset);
 
-var g = svg.append("g"),
-    cities = svg.append("cities");
+var g = svg.append("g");
 
 svg
     .call(zoom) //free zoom
@@ -71,11 +70,17 @@ d3.json("ukCountries.json", function (error, uk) {
     g.selectAll(".subunit-label")
         .data(topojson.feature(uk, uk.objects.countries_regions).features)
         .enter().append("text")
-        .attr("class", function(d) { return "subunit-label " + d.id; })
-        .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+        .attr("class", function (d) {
+            return "subunit-label " + d.id;
+        })
+        .attr("transform", function (d) {
+            return "translate(" + path.centroid(d) + ")";
+        })
         .attr("dy", ".35em")
         .attr("dx", "-2em")
-        .text(function(d) { return d.properties.name; });
+        .text(function (d) {
+            return d.properties.name;
+        });
 });
 
 //functions
