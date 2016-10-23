@@ -54,7 +54,7 @@ function getCities(numberOfCities) {
                 .attr("xlink:href", rand)
                 .attr("class", 'town_icon')
                 .append("svg:title")
-                //adding title that will be used by modal later on 
+                //adding title that will be used by modal later on
                 .html('<b>Town name:</b> ' + name + ' <br>' + '<b>County:</b> ' + country + ' <br>' + '<b>Population:</b> ' + +population);
 
 

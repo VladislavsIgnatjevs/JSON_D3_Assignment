@@ -98,8 +98,11 @@ function clicked(d) {
         .duration(750)
         .call(zoom.translate(translate).scale(scale).event);
 
-    g.selectAll(".subunit-label."+d.id)
-        .attr("visibility", "hidden");
+    //hiding label only if its element is defined to prevent error
+    if (typeof d !== 'undefined') {
+        g.selectAll(".subunit-label." + d.id)
+            .attr("visibility", "hidden");
+    }
 }
 //zoom reset
 function reset(d) {
@@ -110,8 +113,11 @@ function reset(d) {
         .duration(750)
         .call(zoom.translate([0, 0]).scale(1).event);
 
-    g.selectAll(".subunit-label."+d.id)
-        .attr("visibility", "visible");
+    //showing label only if its element is defined to prevent error
+    if (typeof d !== 'undefined') {
+        g.selectAll(".subunit-label." + d.id)
+            .attr("visibility", "visible");
+    }
 }
 
 //in zoom
