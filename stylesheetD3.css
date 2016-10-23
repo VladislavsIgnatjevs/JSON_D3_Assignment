@@ -27,6 +27,16 @@
     display: none;
 
 }
+.subunit-label.IRL {
+    display: none;
+}
+
+.subunit-label {
+    opacity: 0.5;
+    text-transform: uppercase;
+    font-weight: 900;
+
+}
 
 .subunit-boundary.IRL {
     stroke: #aaa;
@@ -55,8 +65,11 @@
 }
 
 .subunit.active {
-    fill: #70593B;
-    stroke: black;
+
+    fill: #AC9855;
+    /* uncomment the following add stroke and pattern */
+    /* stroke: black; */
+    /*fill: url(#crosshatch)*/
 
 }
 

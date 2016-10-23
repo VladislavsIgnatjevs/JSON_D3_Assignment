@@ -2,6 +2,10 @@
  * Created by vignatjevs on 18/10/2016.
  */
 
+//this code was partially written with the help  of following tutorials: https://bl.ocks.org/mbostock
+//https://bost.ocks.org/mike/map/
+
+
 var width = $(window).width() * 0.7,
     height = $(window).height() * 0.75,
     active = d3.select(null),
@@ -44,6 +48,7 @@ svg
 d3.json("ukCountries.json", function (error, uk) {
     if (error) throw error;
 
+
     g.selectAll(".subunit")
         .data(topojson.feature(uk, uk.objects.countries_regions).features)
         .enter().append("path")
@@ -51,6 +56,7 @@ d3.json("ukCountries.json", function (error, uk) {
             return "subunit " + d.id;
         })
         .attr("d", path)
+
         .on("click", clicked);
 
 
@@ -61,12 +67,22 @@ d3.json("ukCountries.json", function (error, uk) {
         .attr("class", "mesh")
         .attr("d", path);
 
+
+    g.selectAll(".subunit-label")
+        .data(topojson.feature(uk, uk.objects.countries_regions).features)
+        .enter().append("text")
+        .attr("class", function(d) { return "subunit-label " + d.id; })
+        .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+        .attr("dy", ".35em")
+        .attr("dx", "-2em")
+        .text(function(d) { return d.properties.name; });
 });
 
+//functions
 
 //zooming
 function clicked(d) {
-    if (active.node() === this) return reset();
+    if (active.node() === this) return reset(d);
     active.classed("active", false);
     active = d3.select(this).classed("active", true);
 
@@ -81,17 +97,21 @@ function clicked(d) {
     svg.transition()
         .duration(750)
         .call(zoom.translate(translate).scale(scale).event);
-}
 
-//functions
+    g.selectAll(".subunit-label."+d.id)
+        .attr("visibility", "hidden");
+}
 //zoom reset
-function reset() {
+function reset(d) {
     active.classed("active", false);
     active = d3.select(null);
 
     svg.transition()
         .duration(750)
         .call(zoom.translate([0, 0]).scale(1).event);
+
+    g.selectAll(".subunit-label."+d.id)
+        .attr("visibility", "visible");
 }
 
 //in zoom

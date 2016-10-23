@@ -41,16 +41,20 @@ function getCities(numberOfCities) {
             country = val['County'];
 
             // add town to map
-            var coordinates = projection([lng, lat]);
-
+            var coordinates = projection([lng, lat]),
+                //show random icon for city when appening - to make map more colorful, add more icos to the project and
+                //add filenames in the array below
+                icosArray = ['town_ico.png','town_ico1.png'],
+                rand = icosArray[Math.floor(Math.random() * icosArray.length)];
             g.append("svg:image")
                 .attr("x", coordinates[0])
                 .attr("y", coordinates[1])
                 .attr('width', 8)
                 .attr('height', 8)
-                .attr("xlink:href", "town_ico.png")
+                .attr("xlink:href", rand)
                 .attr("class", 'town_icon')
                 .append("svg:title")
+                //adding title that will be used by modal later on 
                 .html('<b>Town name:</b> ' + name + ' <br>' + '<b>County:</b> ' + country + ' <br>' + '<b>Population:</b> ' + +population);
 
 
