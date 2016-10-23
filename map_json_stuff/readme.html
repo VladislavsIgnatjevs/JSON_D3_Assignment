@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>How to generate json for UK map svg</title>
+    <meta name="description" content="Vladislavs Ignatjevs">
+
+
+    <!--jquery-->
+    <script src="/js/jquery-2.2.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+    <!-- main CSS -->
+    <link href="/stylesheetMain.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+<h1>Preparing stuff</h1>
+
+<ol>
+    <li>
+        Download this zip archive:<br>
+        <a href="http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_map_subunits.zip">ne_10m_admin_0_map_subunits.zip</a>
+    </li>
+    <li>First need to install gdal and topojson:</li>
+
+    Easiest way is to install using <a href="http://brew.sh/">Homebrew</a>
+    If you don't have homebrew, run this to install it:
+    <pre><code>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></pre>
+
+    <pre><code>brew install gdal</code></pre>
+    <pre><code>brew install npm</code></pre>
+
+    and then
+
+    <pre><code>npm install -g topojson</code></pre>
+
+    Now verify:
+    <pre><code>'which ogr2ogr'</code></pre>
+    <pre><code>'which topojson'</code></pre>
+
+
+    ..should return <pre><code>/usr/local/bin/ogr2ogr</code></pre> and <pre><code>/usr/local/bin/topojson</code></pre>
+
+    Now, for simplicty, lets install and run http server:<br>
+    <pre><code>'npm install http-server -g'</code></pre>
+
+    then open new terminal window and run <pre><code>'http-server -p 8008 &'</code></pre>
+
+    unzip archives into your project dir.<br>
+
+    <li> Now let's create our .json for UK map</li>
+
+    <pre><code>cd ne_10m_admin_0_map_subunits</code></pre> and run the following:
+
+    <pre><code>
+    ogr2ogr /
+    -f GeoJSON /
+    -where "ADM0_A3 IN ('GBR', 'IRL', 'IMN')" /
+    countries_regions.json /
+    ne_10m_admin_0_map_subunits.shp
+    </code></pre>
+
+
+    <ul>
+        <li><i>this will create geojson format json file <kbd>countries_regions.json</kbd></i></li>
+        <li><i>Options like 'IMN', 'GBR' can be added or removed according to <a
+                href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3">ISO 3166-1 alpha 3</a></i></li>
+    </ul>
+
+
+    then <pre><code>mv countries_regions.json ..</code></pre>
+    <pre><code>cd ..</code></pre> will get you back to your project dir.
+
+    run the following here:
+    <pre><code>
+    topojson /
+    -o ukCountries.json /
+    --id-property SU_A3 /
+    --properties name=NAME /
+    --countries_regions.json
+    </code></pre>
+    <ul>
+        <li><i>this will create topojson format json file <kbd>countries_regions.json</kbd> that is used in a project</i></li>
+    </ul>
+</ol>
+</body>
+</html>

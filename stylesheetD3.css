@@ -1,41 +1,35 @@
 .subunit.SCT {
     fill: #ddc;
+
 }
 
 .subunit.WLS {
     fill: #cdd;
+
 }
 
 .subunit.NIR {
     fill: #cdc;
+
 }
 
 .subunit.ENG {
     fill: #dcd;
+
 }
 
 .subunit.IMN {
     fill: #D5C9C1;
+
 }
 
 .subunit.IRL {
     display: none;
-}
 
-.subunit-boundary {
-    fill: none;
-    stroke: #777;
-    stroke-dasharray: 2, 2;
-    stroke-linejoin: round;
 }
 
 .subunit-boundary.IRL {
     stroke: #aaa;
-}
-
-.county-boundary {
-    fill: none;
-    stroke: #777;
 }
 
 .background {
@@ -43,18 +37,39 @@
     pointer-events: all;
 }
 
+.fieldsSelectionBox {
+    fill: white;
+    pointer-events: all;
+    stroke: black;
+}
+
+.backgroundSelectionBox {
+    fill: #DCD6D6;
+    pointer-events: all;
+    stroke: black;
+}
+
 .feature {
     fill: #ccc;
     cursor: pointer;
 }
 
-.feature.active {
-    fill: orange;
+.subunit.active {
+    fill: #70593B;
+    stroke: black;
+
 }
 
 .mesh {
     fill: none;
-    stroke: #fff;
-    stroke-linecap: round;
+    stroke: #777;
+    stroke-dasharray: 2, 2;
     stroke-linejoin: round;
+
+}
+
+.town_icon:hover{
+    fill-opacity:0.8;
+    opacity: 0.5;
+
 }

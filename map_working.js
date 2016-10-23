@@ -16,7 +16,7 @@ var width = 1000,
         .projection(projection),
     svg = d3.select("body").append("svg")
         .attr("width", width)
-        .attr("height", height)
+        .attr("height", height);
 towns = [];
 
 svg.append("rect")
@@ -72,7 +72,9 @@ function clicked(d) {
     }
 
     g.selectAll("path")
-        .classed("active", centered && function(d) { return d === centered; });
+        .classed("active", centered && function (d) {
+                return d === centered;
+            });
 
     g.transition()
         .duration(750)

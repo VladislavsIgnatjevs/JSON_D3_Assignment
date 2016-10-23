@@ -2,14 +2,14 @@
  * Created by vignatjevs on 18/10/2016.
  */
 
-var width = 960,
-    height = 900,
+var width = $(window).width() * 0.7,
+    height = $(window).height() * 0.75,
     active = d3.select(null),
     projection = d3.geo.albers()
         .center([0, 55.4])
         .rotate([4.4, 0])
         .parallels([50, 60])
-        .scale(1200 * 5)
+        .scale(1000 * 5)
         .translate([width / 2, height / 2]),
     zoom = d3.behavior.zoom()
         .translate([0, 0])
@@ -18,17 +18,18 @@ var width = 960,
         .on("zoom", zoomed),
     path = d3.geo.path()
         .projection(projection),
+
+    //map
     svg = d3.select("body").append("svg")
         .attr("width", width)
         .attr("height", height)
         .on("click", stopped, true),
     towns = [];
 
+//bg
 svg.append("rect")
     .attr("class", "background")
     .attr("width", width)
-    .style("stroke", 'black')
-    .style("stroke-width", '3px')
     .attr("height", height)
     .on("click", reset);
 
@@ -36,7 +37,7 @@ var g = svg.append("g"),
     cities = svg.append("cities");
 
 svg
-    .call(zoom) // delete this line to disable free zooming
+    .call(zoom) //free zoom
     .call(zoom.event);
 
 //populating countries to the map SCT, WLS, NIR, ENG, IMN
@@ -51,6 +52,7 @@ d3.json("ukCountries.json", function (error, uk) {
         })
         .attr("d", path)
         .on("click", clicked);
+
 
     g.append("path")
         .datum(topojson.mesh(uk, uk.objects.countries_regions, function (a, b) {
@@ -81,6 +83,7 @@ function clicked(d) {
         .call(zoom.translate(translate).scale(scale).event);
 }
 
+//functions
 //zoom reset
 function reset() {
     active.classed("active", false);
@@ -102,3 +105,13 @@ function zoomed() {
 function stopped() {
     if (d3.event.defaultPrevented) d3.event.stopPropagation();
 }
+
+
+$('body').on('click', 'image', function () {
+    var text = $(event.target).children().html();
+    $('.modal-title').html('City Details');
+    $('.modal-body').html(text);
+    $('#townDetailsModal').modal('show');
+});
+
+

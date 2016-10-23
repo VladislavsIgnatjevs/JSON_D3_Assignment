@@ -6,14 +6,26 @@
     <meta charset="UTF-8">
     <title>UK Cities on the map</title>
 
-    <link href="stylesheet.css" rel="stylesheet" type="text/css">
+    <!-- CSS used for SVG styling -->
+    <link href="stylesheetD3.css" rel="stylesheet" type="text/css">
+
+    <!-- main CSS -->
+    <link href="stylesheetMain.css" rel="stylesheet" type="text/css">
 
     <!--jquery-->
     <script src="js/jquery-2.2.0.min.js"></script>
 
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
     <!--D3-->
     <script src="js/d3/d3.v3.min.js"></script>
-<!--    <script src="//d3js.org/d3.v4.min.js"></script> -->
+    <!--    <script src="//d3js.org/d3.v4.min.js"></script> -->
 
     <!-- Topojson -->
     <script src="js/topojson.v1.min.js"></script>
@@ -25,18 +37,65 @@
 </head>
 <body>
 
-<h3>Input number of cities to show on the map</h3>
+<h3>Show random UK cities on the map</h3>
+
+<!-- City Details Modal -->
+<div class="modal fade" id="townDetailsModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">City Details</h4>
+            </div>
+            <div class="modal-body">
+                <p>City Details</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Help Modal -->
+<div class="modal fade" id="helpModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">How to use</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                <ol>
+                    <li>Input number of cities to be shown and press "Show Cities"</li>
+                    <li>Navigate through the map by dragging, zooming in/out or clicking on areas</li>
+                    <li>See details of the city by clicking on its icon</li>
+                </ol>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
 
 <!--user input form for json-->
 <form id="userInputForm">
 
     <label for="numberOfCities">Number of cities</label>
-    <input type="text" id="numberOfCities" name="numberOfCities"><br>
+    <input type="number" value="10" id="numberOfCities" name="numberOfCities"><br>
 
-    <label for="button"></label>
-    <input type="button" value="Submit" id="button">
-
-    <p>(you can select region to zoom)</p>
+    <ul class="nav nav-pills">
+        <li role="presentation" class="active"><a href="#" id="button">Show Cities</a></li>
+        <li role="presentation"><a href="#" data-toggle="modal" data-target="#helpModal">How to use</a></li>
+        <li role="presentation"><a href="map_json_stuff/readme.html">How to Install</a></li>
+    </ul>
 
 </form>
 
